@@ -13,4 +13,5 @@ steps:
     entrypoint: bash
     args:
       - '-c'
-      - '/usr/local/sonar-scanner/bin/sonar-scanner -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=goprojectanalysis -Dsonar.projectKey=goprojectanalysis-projectkey -Dsonar.login=f59f893b3eafa15e2bd3c7faa5895e1f9137404a'
+      - 'SONAR_SCANNER=/usr/local/sonar-scanner/bin/sonar-scanner'
+      - '$SONAR_SCANNER -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=goprojectanalysis -Dsonar.projectKey=goprojectanalysis-projectkey -Dsonar.login=f59f893b3eafa15e2bd3c7faa5895e1f9137404a'
