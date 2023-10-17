@@ -4,3 +4,20 @@ steps:
     args:
       - '-c'
       - 'curl -sLo sonar-scanner-cli.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip && unzip sonar-scanner-cli.zip && mv sonar-scanner-5.0.1.3006-linux /usr/local/sonar-scanner'
+
+  # Add a step to install Go and any dependencies, if needed.
+  - name: 'gcr.io/cloud-builders/go'
+    args: ['go', 'get', './...']
+
+  # Add a step to run tests for your Go project and record code coverage.
+  - name: 'gcr.io/cloud-builders/go'
+    args: ['go', 'test', '-short', '-coverprofile=bin/cov.out', '`go list ./... | grep -v vendor/`']
+
+  # Add a step to analyze your Go code with SonarScanner.
+  - name: 'maven:3-jdk-11'
+    entrypoint: bash
+    args:
+      - '-c'
+      - 'sonar-scanner -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=goprojectanalysis -Dsonar.projectKey=goprojectanalysis-projectkey -Dsonar.login=f59f893b3eafa15e2bd3c7faa5895e1f9137404a'
+
+# Add any other steps or configurations specific to your Go project or additional testing tools you want to use.
