@@ -1,16 +1,11 @@
 steps:
-  # Replace this with a suitable JDK-based image that includes SonarScanner
   - name: 'maven:3-jdk-11'
     entrypoint: bash
     args:
       - '-c'
-      - 'curl -sLo sonar-scanner-cli.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-x.y.z.zip && unzip sonar-scanner-cli.zip && mv sonar-scanner-x.y.z /usr/local/ && export PATH=$PATH:/usr/local/sonar-scanner-x.y.z/bin'
-
+      - 'export PATH=$PATH:/usr/local/sonar-scanner-x.y.z/bin'
   - name: 'maven:3-jdk-11'
     entrypoint: bash
     args:
       - '-c'
       - 'sonar-scanner -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=goprojectanalysis -Dsonar.projectKey=goprojectanalysis-projectkey -Dsonar.login=f59f893b3eafa15e2bd3c7faa5895e1f9137404a'
-
-# Add other steps for building and testing your Go project here
-
