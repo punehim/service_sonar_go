@@ -1,0 +1,14 @@
+steps:
+  # Replace this with the appropriate Go builder, e.g., golang:1.x if needed
+  - name: gcr.io/cloud-builders/go
+    entrypoint: bash
+    args:
+      - '-c'
+      - 'go get -u github.com/SonarSource/sonar-scanner-cli'
+  - name: gcr.io/cloud-builders/go
+    entrypoint: bash
+    args:
+      - '-c'
+      - 'sonar-scanner -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=goprojectanalysis -Dsonar.projectKey=goprojectanalysis-projectkey -Dsonar.login=f59f893b3eafa15e2bd3c7faa5895e1f9137404a'
+
+# Add other steps for building and testing your Go project here
