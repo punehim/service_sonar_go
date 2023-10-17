@@ -1,5 +1,5 @@
 steps:
-  # Install Go and other necessary dependencies, Install Snyk CLI, and Run Snyk SCA security scan
+  # Install Go and other necessary dependencies
   - name: 'golang:1.16'  # Use the appropriate Go version
     entrypoint: 'bash'
     args:
@@ -7,6 +7,8 @@ steps:
       - |-
         apt-get update
         apt-get -y install git
+        # Install Node.js and npm
+        apt-get -y install nodejs npm
         # Install Snyk CLI
         npm install -g snyk
         SNYK_TOKEN=${_SNYK_TOKEN}
@@ -15,4 +17,3 @@ steps:
         go build
         # Run Snyk SCA security scan on the current directory
         snyk test .
-
