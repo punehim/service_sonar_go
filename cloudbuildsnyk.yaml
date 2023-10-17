@@ -1,5 +1,5 @@
 steps:
-  # Install Go and other necessary dependencies
+  # Install Go and other necessary dependencies, Install Snyk CLI, and Run Snyk SCA security scan
   - name: 'golang:1.16'  # Use the appropriate Go version
     entrypoint: 'bash'
     args:
@@ -11,19 +11,8 @@ steps:
         npm install -g snyk
         SNYK_TOKEN=${_SNYK_TOKEN}
         export SNYK_TOKEN
-
-  # Build your Go project
-  - name: 'golang:1.16'  # Use the same Go version as above
-    entrypoint: 'bash'
-    args:
-      - '-c'
-      - |-
+        # Build your Go project (in the root folder)
         go build
+        # Run Snyk SCA security scan on the current directory
+        snyk test .
 
-  # Run Snyk SCA security scan
-  - name: 'golang:1.16'  # Use the same Go version as above
-    entrypoint: 'bash'
-    args:
-      - '-c'
-      - |-
-        snyk test
