@@ -9,6 +9,8 @@ steps:
     entrypoint: go
     args: ['test', '-coverprofile=cover.txt', './...']
 
-  - name: 'maven:3-jdk-11'
+  - name: maven:3-jdk-11
     entrypoint: bash
-    args: ['/usr/local/sonar-scanner/bin/sonar-scanner', '-Dsonar.host.url=https://sonarcloud.io', '-Dsonar.organization=goprojectanalysis', '-Dsonar.projectKey=goprojectanalysis-projectkey', '-Dsonar.login=f59f893b3eafa15e2bd3c7faa5895e1f9137404a']
+    args:
+      - '-c'
+      - '/usr/local/sonar-scanner/bin/sonar-scanner -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=goprojectanalysis -Dsonar.projectKey=goprojectanalysis-projectkey -Dsonar.login=f59f893b3eafa15e2bd3c7faa5895e1f9137404a'
