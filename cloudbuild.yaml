@@ -1,19 +1,9 @@
 steps:
-  - name: maven:3-jdk-11
-    entrypoint: bash
-    args:
-      - '-c'
-      - 'curl -sLo sonar-scanner-cli.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip && unzip sonar-scanner-cli.zip && mv sonar-scanner-5.0.1.3006-linux /usr/local/sonar-scanner'
-
   - name: 'gcr.io/cloud-builders/go'
     entrypoint: go
     args: ['test', '-coverprofile=cover.txt', './...']
-
-  steps:
   - name: maven:3-jdk-11
     entrypoint: bash
     args:
       - '-c'
-      - |
-        export _SONAR_SCANNER=/usr/local/sonar-scanner/bin/sonar-scanner
-        ${_SONAR_SCANNER} -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=goprojectanalysis -Dsonar.projectKey=goprojectanalysis-projectkey -Dsonar.login=f59f893b3eafa15e2bd3c7faa5895e1f9137404a
+      - 'curl -sLo sonar-scanner-cli.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip && unzip sonar-scanner-cli.zip && mv sonar-scanner-5.0.1.3006-linux /usr/local/sonar-scanner && /usr/local/sonar-scanner/bin/sonar-scanner -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=goprojectanalysis -Dsonar.projectKey=goprojectanalysis-projectkey -Dsonar.login=f59f893b3eafa15e2bd3c7faa5895e1f9137404a'
