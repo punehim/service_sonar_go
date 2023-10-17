@@ -3,4 +3,4 @@ steps:
     entrypoint: bash
     args:
       - '-c'
-      - 'curl -sLo sonar-scanner-cli.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip && unzip sonar-scanner-cli.zip && mv sonar-scanner-5.0.1.3006-linux /usr/local/sonar-scanner && export PATH=$PATH:/usr/local/sonar-scanner/bin'
+      - 'curl -sLo sonar-scanner-cli.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip && unzip sonar-scanner-cli.zip && mv sonar-scanner-5.0.1.3006-linux /usr/local/sonar-scanner'
