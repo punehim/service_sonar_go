@@ -16,4 +16,5 @@ steps:
         # Build your Go project (in the root folder)
         go build
         # Run Snyk SCA security scan on the current directory
-        snyk test .
+        snyk test
+    id: Snyk SCA    
