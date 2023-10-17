@@ -1,8 +1,7 @@
 steps:
   - name: 'gcr.io/cloud-builders/go'
     entrypoint: go
-    args: ['test', '-short', '-coverprofile=bin/cov.out', './...']
-
+    args: ['test', '-coverprofile=cover.txt', './...']
   - name: maven:3-jdk-11
     entrypoint: bash
     args:
